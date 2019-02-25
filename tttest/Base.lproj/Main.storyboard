@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labelpppppp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvT-nh-LKr">
+                                <rect key="frame" x="109.5" y="108" width="101.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y04-Jn-2tk">
+                                <rect key="frame" x="155" y="276" width="43" height="30"/>
+                                <state key="normal" title="Picker"/>
+                                <connections>
+                                    <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uqv-c3-rCU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mp3-AO-Ut1">
+                                <rect key="frame" x="109.5" y="179" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kW-5S-szJ">
+                                <rect key="frame" x="148" y="318" width="56" height="30"/>
+                                <state key="normal" title="Browser"/>
+                                <connections>
+                                    <action selector="browserAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hVs-TW-f1q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWk-13-q6T">
+                                <rect key="frame" x="164" y="375" width="40" height="30"/>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="shareAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T7m-me-xyn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="mp3-AO-Ut1" firstAttribute="leading" secondItem="YvT-nh-LKr" secondAttribute="leading" id="9oe-Q4-mnB"/>
+                            <constraint firstItem="Y04-Jn-2tk" firstAttribute="top" secondItem="YvT-nh-LKr" secondAttribute="bottom" constant="147.5" id="KQD-oK-ZNR"/>
+                            <constraint firstItem="RWk-13-q6T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="148" id="LIy-0G-R4w"/>
+                            <constraint firstItem="9kW-5S-szJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="132" id="V99-R4-YdD"/>
+                            <constraint firstItem="Y04-Jn-2tk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="139" id="a5F-5s-0zr"/>
+                            <constraint firstItem="mp3-AO-Ut1" firstAttribute="top" secondItem="YvT-nh-LKr" secondAttribute="bottom" constant="50.5" id="bBX-CX-9yb"/>
+                            <constraint firstItem="9kW-5S-szJ" firstAttribute="top" secondItem="Y04-Jn-2tk" secondAttribute="bottom" constant="12" id="e3Y-rE-EAP"/>
+                            <constraint firstItem="Y04-Jn-2tk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-42.5" id="fZm-mn-h43"/>
+                            <constraint firstItem="RWk-13-q6T" firstAttribute="top" secondItem="9kW-5S-szJ" secondAttribute="bottom" constant="27" id="pCR-13-gM6"/>
+                            <constraint firstItem="YvT-nh-LKr" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="88" id="qSl-eT-eVa"/>
+                            <constraint firstItem="Y04-Jn-2tk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-11" id="toA-zU-3KH"/>
+                            <constraint firstItem="YvT-nh-LKr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-27.25" id="xJZ-dT-h0s"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4mJ-Q8-Ada"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572.79999999999995" y="357.12143928035982"/>
+        </scene>
+    </scenes>
+</document>
