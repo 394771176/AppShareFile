@@ -81,8 +81,6 @@
     [self presentViewController:vc animated:YES completion:^{
         
     }];
-    
-    
 }
 - (IBAction)browserAction:(id)sender {
     //ios 11
