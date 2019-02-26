@@ -10,9 +10,11 @@
 #import <Photos/Photos.h>
 #import "DTFileShareManager.h"
 #import "TableViewController.h"
+#import "FFJSONHelper.h"
 
 @interface ViewController () <UIDocumentPickerDelegate, UIDocumentBrowserViewControllerDelegate> {
     UIImageView *_imageV;
+    IBOutlet UILabel *label1;
 }
 
 @end
@@ -23,7 +25,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUPS_SECURITY_ID];
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUPS_SECURITY_ID2];
     NSDictionary *dict = [sharedDefaults objectForKey:@"img"];
     
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -39,13 +41,39 @@
 
 - (IBAction)btnAction:(id)sender {
 //    _imageV.hidden = !_imageV.hidden;
-//    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUPS_SECURITY_ID];
-//    NSDictionary *dict = [sharedDefaults objectForKey:@"img"];
-//    NSLog(@"shareType = %@", [dict objectForKey:@"type"]);
-//    NSLog(@"shareText = %@", [dict objectForKey:@"text"]);
-//    NSLog(@"shareClass = %@", [dict objectForKey:@"class"]);
-//    NSLog(@"dataType  = %@", [sharedDefaults objectForKey:@"dataType"]);
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUPS_SECURITY_ID2];
+    id shareItemData = [sharedDefaults objectForKey:@"share_item_data"];
+    id shareItemString = [sharedDefaults objectForKey:@"share_item_string"];
+    id shareItem = shareItemData;
+    if (shareItem) {
+        NSLog(@"share_item:%@", shareItem);
+        
+        label1.text = [NSString stringWithFormat:@"%@", shareItem];
+        
+        if ([shareItem isKindOfClass:[NSDictionary class]]) {
+            NSURL *url = [shareItem objectForKey:@"share_url"];
+            NSString *urlStr = [shareItem objectForKey:@"share_url_string"];
+            if (url) {
+                [DTFileShareManager handleOpenURL:url];
+            } else {
+                url = [NSURL URLWithString:urlStr];
+                
+                [DTFileShareManager handleOpenURL:url];
+            }
+        } else if ([shareItem isKindOfClass:[NSString class]]) {
+            NSDictionary *dict = [shareItem JSONObject];
+            if (dict) {
+                NSURL *url = [dict objectForKey:@"share_url"];
+                [DTFileShareManager handleOpenURL:url];
+            }
+        }
+        
+        
+    } else {
+        label1.text = @"null";
+    }
     
+    return;
     UIDocumentPickerViewController *vc = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.image",@"public.pdf",@"public.txt",@"public.data"]
                                                                                                 inMode:UIDocumentPickerModeImport];
     vc.delegate = self;

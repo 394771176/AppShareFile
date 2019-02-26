@@ -11,6 +11,8 @@
 		603F20861D5DCF3400226A1D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 603F20841D5DCF3400226A1D /* MainInterface.storyboard */; };
 		603F208A1D5DCF3400226A1D /* share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 603F207F1D5DCF3400226A1D /* share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		608BDB772222D7A000C0DA9B /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608BDB762222D7A000C0DA9B /* TableViewController.m */; };
+		60B0ED9822254CAB00A9CB8D /* FFJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */; };
+		60B0ED9922254CD600A9CB8D /* FFJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */; };
 		60D1AD9E221FD7B7005DB37C /* DTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D1AD9D221FD7B7005DB37C /* DTFileManager.m */; };
 		60D1ADA1221FD7F4005DB37C /* DTFileShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D1ADA0221FD7F4005DB37C /* DTFileShareManager.m */; };
 		60F5CC461C43904B00801154 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F5CC451C43904B00801154 /* main.m */; };
@@ -73,6 +75,8 @@
 		603F20921D5DD14600226A1D /* tttest.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tttest.pch; sourceTree = "<group>"; };
 		608BDB752222D7A000C0DA9B /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		608BDB762222D7A000C0DA9B /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		60B0ED9622254CAB00A9CB8D /* FFJSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFJSONHelper.h; sourceTree = "<group>"; };
+		60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFJSONHelper.m; sourceTree = "<group>"; };
 		60D1AD9C221FD7B7005DB37C /* DTFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTFileManager.h; sourceTree = "<group>"; };
 		60D1AD9D221FD7B7005DB37C /* DTFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTFileManager.m; sourceTree = "<group>"; };
 		60D1AD9F221FD7F4005DB37C /* DTFileShareManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTFileShareManager.h; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				60F5CC4B1C43904B00801154 /* ViewController.m */,
 				608BDB752222D7A000C0DA9B /* TableViewController.h */,
 				608BDB762222D7A000C0DA9B /* TableViewController.m */,
+				60B0ED9622254CAB00A9CB8D /* FFJSONHelper.h */,
+				60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */,
 				60D1AD9C221FD7B7005DB37C /* DTFileManager.h */,
 				60D1AD9D221FD7B7005DB37C /* DTFileManager.m */,
 				60D1AD9F221FD7F4005DB37C /* DTFileShareManager.h */,
@@ -298,7 +304,8 @@
 				TargetAttributes = {
 					603F207E1D5DCF3400226A1D = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = H9J886PZ98;
+						DevelopmentTeam = 74KWVXXP86;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -307,7 +314,8 @@
 					};
 					60F5CC401C43904B00801154 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = H9J886PZ98;
+						DevelopmentTeam = 74KWVXXP86;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -386,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				603F20831D5DCF3400226A1D /* ShareViewController.m in Sources */,
+				60B0ED9922254CD600A9CB8D /* FFJSONHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B0ED9822254CAB00A9CB8D /* FFJSONHelper.m in Sources */,
 				60F5CC4C1C43904B00801154 /* ViewController.m in Sources */,
 				608BDB772222D7A000C0DA9B /* TableViewController.m in Sources */,
 				60D1AD9E221FD7B7005DB37C /* DTFileManager.m in Sources */,
@@ -471,11 +481,15 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_ENTITLEMENTS = share/share.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Wu (UXLF895AGX)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 74KWVXXP86;
 				INFOPLIST_FILE = share/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hehe.tttest.share;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eclicks.drivingtest.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Drivingtest Today Dev";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -485,10 +499,11 @@
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CODE_SIGN_ENTITLEMENTS = share/share.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				INFOPLIST_FILE = share/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hehe.tttest.share;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eclicks.drivingtest.TodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -581,12 +596,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tttest/tttest.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Wu (UXLF895AGX)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 74KWVXXP86;
 				GCC_PREFIX_HEADER = tttest/tttest.pch;
 				INFOPLIST_FILE = tttest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hehe.tttest;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eclicks.drivingtest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Drivingtest Dev";
 			};
 			name = Debug;
 		};
@@ -595,11 +614,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = tttest/tttest.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				GCC_PREFIX_HEADER = tttest/tttest.pch;
 				INFOPLIST_FILE = tttest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hehe.tttest;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eclicks.drivingtest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

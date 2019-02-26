@@ -8,6 +8,7 @@
 
 #import "ShareViewController.h"
 #import "TTDefine.h"
+#import "FFJSONHelper.h"
 
 @interface ShareViewController ()
 
@@ -32,9 +33,14 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
     // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
     [self.extensionContext.inputItems enumerateObjectsUsingBlock:^(NSExtensionItem * _Nonnull extItem, NSUInteger idx, BOOL * _Nonnull stop) {
         [extItem.attachments enumerateObjectsUsingBlock:^(NSItemProvider * _Nonnull itemProvider, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:APP_GROUPS_SECURITY_ID];
+            NSString *groupId = APP_GROUPS_SECURITY_ID2;
+            NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:groupId];
             NSString *dataType = itemProvider.registeredTypeIdentifiers.firstObject;//实际上一个NSItemProvider里也只有一种数据类型
-            [sharedDefaults setObject:dataType?:@"" forKey:@"dataType"];
+            
+            NSMutableDictionary *shareObj = [NSMutableDictionary dictionary];
+            [shareObj setObject:dataType?:@"" forKey:@"data_type"];
+            [shareObj setObject:self.contentText forKey:@"share_text"];
+            
             if ([itemProvider hasItemConformingToTypeIdentifier:@"public.url"])
             {
                 [itemProvider loadItemForTypeIdentifier:@"public.url"
@@ -44,17 +50,23 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
                                           if ([(NSObject *)item isKindOfClass:[NSURL class]])
                                           {
                                               NSLog(@"分享的URL = %@", item);
-                                              [sharedDefaults setValue: ((NSURL *)item).absoluteString forKey:@"share-url"];
+//                                              [shareObj setValue: ((NSURL *)item) forKey:@"share_url"];
+                                              [shareObj setValue: ((NSURL *)item).absoluteString forKey:@"share_url_string"];
                                               //用于标记是新的分享
-                                              [sharedDefaults setBool:YES forKey:@"has-new-share"];
+//                                              [sharedDefaults setBool:YES forKey:@"has-new-share"];
+                                              
+                                              [sharedDefaults setObject:shareObj forKey:@"share_item"];
+                                              [sharedDefaults synchronize];
                                           }
-                                          
                                       }];
             } else if ([itemProvider hasItemConformingToTypeIdentifier:@"public.png"]||[itemProvider hasItemConformingToTypeIdentifier:@"public.image"]||[itemProvider hasItemConformingToTypeIdentifier:@"public.jpeg"]) {
                 [itemProvider loadItemForTypeIdentifier:dataType options:nil completionHandler: ^(id<NSSecureCoding> item, NSError *error) {
                     NSData *imgData;
                     if([(NSObject*)item isKindOfClass:[NSURL class]]) {
                         imgData = [NSData dataWithContentsOfURL:(NSURL*)item];
+                        
+//                        [shareObj setValue: ((NSURL *)item) forKey:@"share_url"];
+                        [shareObj setValue: ((NSURL *)item).absoluteString forKey:@"share_url_string"];
                     }
                     if([(NSObject*)item isKindOfClass:[UIImage class]]) {
                         imgData = UIImagePNGRepresentation((UIImage*)item);
@@ -62,13 +74,24 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
                     
                     NSObject *obj = (id)item;
                     NSString *claStr = NSStringFromClass([obj class]);
-                    NSDictionary *dict = @{
-                                           @"imgData" : imgData?:@"",
-                                           @"type" : dataType?:@"",
-                                           @"class" : claStr?:@"",
-                                           @"text" : self.contentText?:@""
-                                           };
-                    [sharedDefaults setObject:dict forKey:@"img"];
+//                    [shareObj setValue: imgData?:@"" forKey:@"share_data"];
+                    [shareObj setValue: claStr?:@"" forKey:@"share_class"];
+                    
+//                    NSString *string = [NSString stringWithFormat:@"%@", shareObj.JSONString];
+//                    [sharedDefaults setObject:string forKey:@"share_item_string"];
+//
+                    if (sharedDefaults) {
+                        [sharedDefaults setObject:shareObj forKey:@"share_item_data"];
+                    }
+                    /*
+                     1.存储时直接把最外层数组转成NSData类型：
+                     
+                     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
+                     
+                     2.获取时把data转成数组类型：
+                     NSMutableArray *userDefaultsArr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                     */
+                    
                     [sharedDefaults synchronize];
                 }];
             }

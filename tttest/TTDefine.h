@@ -12,5 +12,7 @@
 
 //com.apple.security.application-groups
 #define  APP_GROUPS_SECURITY_ID      @"group.cn.eclicks.drivingtest.shared"
+#define  APP_GROUPS_SECURITY_ID2      @"group.drivingtest.practice.progress"
+
 
 #endif /* TTDefine_h */
