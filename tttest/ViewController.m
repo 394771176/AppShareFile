@@ -96,10 +96,16 @@
 }
 - (IBAction)shareAction:(id)sender {
     
-    NSArray<NSString *> *array = [DTFileManager contentsWithPath:[DTFileShareManager sharePath]];
+//    NSArray<NSString *> *array = [DTFileManager contentsWithPath:[DTFileShareManager sharePath]];
+    
+    NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:APP_GROUPS_SECURITY_ID2];
+    url = [url URLByAppendingPathComponent:@"share_file"];
+    
+    NSArray<NSString *> *array = [DTFileManager contentsWithPath:url.path];
     
     TableViewController *vc = [[TableViewController alloc] init];
     vc.dataSource = array;
+    vc.path = url.path;
     [self presentViewController:vc animated:YES completion:nil];
 }
 

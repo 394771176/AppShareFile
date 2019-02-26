@@ -60,7 +60,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSString *fileName = self.dataSource[indexPath.row];
-    NSString *path = [DTFileShareManager pathWithName:fileName];
+    NSString *path = nil;
+    if (!_path) {
+         path = [DTFileShareManager pathWithName:fileName];
+    } else {
+        path = [_path stringByAppendingPathComponent:fileName];
+    }
+        
     if (![DTFileManager isFileDirectory:path]) {
         [DTFileShareManager shareFileWithPath:path vc:self];
     }

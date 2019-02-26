@@ -41,6 +41,11 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
             [shareObj setObject:dataType?:@"" forKey:@"data_type"];
             [shareObj setObject:self.contentText forKey:@"share_text"];
             
+//            [itemProvider loadDataRepresentationForTypeIdentifier:dataType completionHandler:^(NSData * _Nullable data, NSError * _Nullable error) {
+//                NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
+//
+//            }];
+            
             if ([itemProvider hasItemConformingToTypeIdentifier:@"public.url"])
             {
                 [itemProvider loadItemForTypeIdentifier:@"public.url"
@@ -62,14 +67,10 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
             } else if ([itemProvider hasItemConformingToTypeIdentifier:@"public.png"]||[itemProvider hasItemConformingToTypeIdentifier:@"public.image"]||[itemProvider hasItemConformingToTypeIdentifier:@"public.jpeg"]) {
                 [itemProvider loadItemForTypeIdentifier:dataType options:nil completionHandler: ^(id<NSSecureCoding> item, NSError *error) {
                     NSData *imgData;
+                    NSURL *imgUrl;
                     if([(NSObject*)item isKindOfClass:[NSURL class]]) {
+                        imgUrl = (id)item;
                         imgData = [NSData dataWithContentsOfURL:(NSURL*)item];
-                        
-//                        [shareObj setValue: ((NSURL *)item) forKey:@"share_url"];
-                        [shareObj setValue: ((NSURL *)item).absoluteString forKey:@"share_url_string"];
-                    }
-                    if([(NSObject*)item isKindOfClass:[UIImage class]]) {
-                        imgData = UIImagePNGRepresentation((UIImage*)item);
                     }
                     
                     NSObject *obj = (id)item;
@@ -92,7 +93,39 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
                      NSMutableArray *userDefaultsArr = [NSKeyedUnarchiver unarchiveObjectWithData:data];
                      */
                     
-                    [sharedDefaults synchronize];
+//                    [sharedDefaults synchronize];
+                    if (imgData) {
+                        NSLog(@"image data");
+                        
+                        if (imgUrl) {
+                            NSURL *url = [self shareFileDir];
+                            url = [url URLByAppendingPathComponent:imgUrl.lastPathComponent];
+                            
+//                            [[NSFileManager defaultManager] copyItemAtURL:imgUrl toURL:url error:&error];
+                            BOOL success = [imgData writeToURL:url atomically:YES];
+                            
+                            if (!success) {
+                                NSLog(@"file error");
+                            } else {
+                                NSLog(@"file success");
+                            }
+                        }
+                    }
+                    
+//                    if (imgUrl) {
+//                        NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
+//                        url = [url URLByAppendingPathComponent:imgUrl.lastPathComponent];
+//                        
+//                        NSError *error;
+//                        [[NSFileManager defaultManager] copyItemAtURL:imgUrl toURL:url error:&error];
+//                        
+//                        if (error) {
+//                            NSLog(@"file error:%@", error);
+//                        } else {
+//                            NSLog(@"file success");
+//                        }
+//                    }
+                    
                 }];
             }
         }];
@@ -130,6 +163,22 @@ static NSInteger const maxCharactersAllowed =  140;//手动设置字符数上限
     
     //    NSArray *array = [item.attachments registeredTypeIdentifiers];
     [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
+}
+
+- (NSURL *)shareFileDir
+{
+    NSError *error;
+    NSURL *url = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:APP_GROUPS_SECURITY_ID2];
+    url = [url URLByAppendingPathComponent:@"share_file"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:url.path]) {
+        if (![fileManager createDirectoryAtPath:url.path withIntermediateDirectories:YES attributes:nil error:&error]) {
+            NSLog(@"Unable to create folder at %@: %@", url.path, error.localizedDescription);
+            return nil;
+        }
+    }
+    return url;
 }
 
 - (NSArray *)configurationItems {

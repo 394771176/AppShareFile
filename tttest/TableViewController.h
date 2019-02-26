@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *dataSource;
 
+@property (nonatomic, strong) NSString *path;//if nil, has default path
+
 @end
