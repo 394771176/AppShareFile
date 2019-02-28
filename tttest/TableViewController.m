@@ -33,11 +33,15 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count + 1;
+    if (section == 0) {
+        return self.dataSource.count ;
+    } else {
+        return 2;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,10 +55,14 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] init];
     }
-    if (indexPath.row < self.dataSource.count) {
+    if (indexPath.section == 0) {
         cell.textLabel.text = self.dataSource[indexPath.row];
     } else {
-        cell.textLabel.text = @"返回";
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"清空文件";
+        } else {
+            cell.textLabel.text = @"返回";
+        }
     }
     return cell;
 }
@@ -63,7 +71,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row < self.dataSource.count) {
+    if (indexPath.section == 0) {
         NSString *fileName = self.dataSource[indexPath.row];
         NSString *path = nil;
         if (!_path) {
@@ -76,6 +84,12 @@
             [_delegate TableViewController:self path:path];
         }
     } else {
+        if (indexPath.row == 0) {
+            [DTFileManager deleteItemWithPath:_path];
+            _dataSource = nil;
+            [tableView reloadData];
+            return;
+        }
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
