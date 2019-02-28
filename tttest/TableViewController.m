@@ -37,7 +37,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    return self.dataSource.count + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,7 +51,11 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] init];
     }
-    cell.textLabel.text = self.dataSource[indexPath.row];
+    if (indexPath.row < self.dataSource.count) {
+        cell.textLabel.text = self.dataSource[indexPath.row];
+    } else {
+        cell.textLabel.text = @"返回";
+    }
     return cell;
 }
 
@@ -59,16 +63,20 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *fileName = self.dataSource[indexPath.row];
-    NSString *path = nil;
-    if (!_path) {
-         path = [DTFileShareManager pathWithName:fileName];
-    } else {
-        path = [_path stringByAppendingPathComponent:fileName];
-    }
+    if (indexPath.row < self.dataSource.count) {
+        NSString *fileName = self.dataSource[indexPath.row];
+        NSString *path = nil;
+        if (!_path) {
+            path = [DTFileShareManager pathWithName:fileName];
+        } else {
+            path = [_path stringByAppendingPathComponent:fileName];
+        }
         
-    if (![DTFileManager isFileDirectory:path]) {
-        [DTFileShareManager shareFileWithPath:path vc:self];
+        if (_delegate && [_delegate respondsToSelector:@selector(TableViewController:path:)]) {
+            [_delegate TableViewController:self path:path];
+        }
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     
 //    [self dismissViewControllerAnimated:YES completion:nil];

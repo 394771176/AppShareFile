@@ -35,11 +35,11 @@ SHARED_INSTANCE_H
 
 + (BOOL)handleOpenURL:(NSURL *)url;
 
++ (BOOL)saveFileWithUrl:(NSURL *)url;
+
 + (void)shareFileWithPath:(NSString *)path;
 
 + (void)shareFileWithURL:(NSURL *)url;
-
-+ (void)shareFileWithPath:(NSString *)path vc:(UIViewController *)vc;
 
 @end
 

@@ -33,7 +33,9 @@ SHARED_INSTANCE_M
 
 + (NSString *)sharePath
 {
-    return DOCPATH(@"share_file");
+    NSString *filePath = DOCPATH(@"share_file");
+    FFCreateFolderIfNeeded(filePath);
+    return filePath;
 }
 
 + (NSString *)pathWithName:(NSString *)name
@@ -62,37 +64,32 @@ SHARED_INSTANCE_M
         NSString *string = [[url absoluteString] stringByRemovingPercentEncoding];
         NSMutableString *path = [[NSMutableString alloc] initWithString:string];
         if ([path hasPrefix:@"file:///private"]) {
-            [path replaceOccurrencesOfString:@"file:///private" withString:@"" options:NSCaseInsensitiveSearch  range:NSMakeRange(0, path.length)];
+            //todo 1
+            [path replaceOccurrencesOfString:@"file:///private" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, path.length)];
         }
 
         NSString *fileName = url.lastPathComponent;
         NSString *filePath = DOCPATH(@"share_file");
         FFCreateFolderIfNeeded(filePath);
         filePath = [filePath stringByAppendingPathComponent:fileName];
-//        NSString *sourceName = options[@"UIApplicationOpenURLOptionsSourceApplicationKey"];
-//        NSLog(@"%@ - %@", sourceName, fileName);
         
         if ([DTFileManager isFileExist:filePath]) {
             NSLog(@"文件已存在");
             return YES;
         }
-        
-        return [DTFileManager copyItemWithPath:path toPath:filePath];
+        BOOL success = [DTFileManager copyItemWithPath:path toPath:filePath];
+        if (success) {
+            NSLog(@"save success");
+        } else {
+            NSLog(@"save fail");
+        }
+        return success;
     }
     return NO;
 }
 
 + (void)shareFileWithPath:(NSString *)path
 {
-//    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-//    cachePath = [cachePath stringByAppendingPathComponent:path.lastPathComponent];
-//
-//    if (![DTFileManager isFileExist:cachePath]) {
-//        [DTFileManager copyItemWithPath:path toPath:cachePath];
-//        NSLog(@"copy to cache");
-//        path = cachePath;
-//    }
-
     NSURL *url = [NSURL fileURLWithPath:path];
     [self shareFileWithURL:url];
 }
@@ -107,18 +104,12 @@ SHARED_INSTANCE_M
     
     NSLog(@"path: %@, UTI: %@", url.absoluteString, vc.UTI);
     
+    //todo 2
     [DTFileShareManager sharedInstance].doc = vc;
     
     [vc presentOpenInMenuFromRect:CGRectZero
                            inView:root.view
                          animated:YES];
-}
-
-+ (void)shareFileWithPath:(NSString *)path vc:(nonnull UIViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:nil];
-    
-    [self shareFileWithPath:path];
 }
 
 + (NSString *)getUTIFromPath:(NSString *)path
