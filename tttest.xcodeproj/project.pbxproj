@@ -10,7 +10,7 @@
 		603F20831D5DCF3400226A1D /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 603F20821D5DCF3400226A1D /* ShareViewController.m */; };
 		603F20861D5DCF3400226A1D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 603F20841D5DCF3400226A1D /* MainInterface.storyboard */; };
 		603F208A1D5DCF3400226A1D /* share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 603F207F1D5DCF3400226A1D /* share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		608BDB772222D7A000C0DA9B /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608BDB762222D7A000C0DA9B /* TableViewController.m */; };
+		608BDB772222D7A000C0DA9B /* FlieListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 608BDB762222D7A000C0DA9B /* FlieListController.m */; };
 		60B0ED9822254CAB00A9CB8D /* FFJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */; };
 		60B0ED9922254CD600A9CB8D /* FFJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */; };
 		60D1AD9E221FD7B7005DB37C /* DTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D1AD9D221FD7B7005DB37C /* DTFileManager.m */; };
@@ -73,8 +73,8 @@
 		603F20901D5DCFB600226A1D /* share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = share.entitlements; sourceTree = "<group>"; };
 		603F20911D5DCFFB00226A1D /* TTDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTDefine.h; sourceTree = "<group>"; };
 		603F20921D5DD14600226A1D /* tttest.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tttest.pch; sourceTree = "<group>"; };
-		608BDB752222D7A000C0DA9B /* TableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		608BDB762222D7A000C0DA9B /* TableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		608BDB752222D7A000C0DA9B /* FlieListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlieListController.h; sourceTree = "<group>"; };
+		608BDB762222D7A000C0DA9B /* FlieListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlieListController.m; sourceTree = "<group>"; };
 		60B0ED9622254CAB00A9CB8D /* FFJSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFJSONHelper.h; sourceTree = "<group>"; };
 		60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFJSONHelper.m; sourceTree = "<group>"; };
 		60D1AD9C221FD7B7005DB37C /* DTFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTFileManager.h; sourceTree = "<group>"; };
@@ -174,8 +174,8 @@
 				60F5CC481C43904B00801154 /* AppDelegate.m */,
 				60F5CC4A1C43904B00801154 /* ViewController.h */,
 				60F5CC4B1C43904B00801154 /* ViewController.m */,
-				608BDB752222D7A000C0DA9B /* TableViewController.h */,
-				608BDB762222D7A000C0DA9B /* TableViewController.m */,
+				608BDB752222D7A000C0DA9B /* FlieListController.h */,
+				608BDB762222D7A000C0DA9B /* FlieListController.m */,
 				60B0ED9622254CAB00A9CB8D /* FFJSONHelper.h */,
 				60B0ED9722254CAB00A9CB8D /* FFJSONHelper.m */,
 				60D1AD9C221FD7B7005DB37C /* DTFileManager.h */,
@@ -404,7 +404,7 @@
 			files = (
 				60B0ED9822254CAB00A9CB8D /* FFJSONHelper.m in Sources */,
 				60F5CC4C1C43904B00801154 /* ViewController.m in Sources */,
-				608BDB772222D7A000C0DA9B /* TableViewController.m in Sources */,
+				608BDB772222D7A000C0DA9B /* FlieListController.m in Sources */,
 				60D1AD9E221FD7B7005DB37C /* DTFileManager.m in Sources */,
 				60F5CC491C43904B00801154 /* AppDelegate.m in Sources */,
 				60F5CC461C43904B00801154 /* main.m in Sources */,

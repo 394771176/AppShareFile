@@ -8,22 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@class TableViewController;
+@class FlieListController;
 
-@protocol TableViewControllerDelegate<NSObject>
+@protocol FlieListControllerDelegate<NSObject>
 
 @optional
 
-- (void)TableViewController:(TableViewController *)vc path:(NSString *)path;
+- (void)FlieListController:(FlieListController *)vc path:(NSString *)path;
 
 @end
 
-@interface TableViewController : UITableViewController
+@interface FlieListController : UITableViewController
 
 @property (nonatomic, strong) NSArray *dataSource;
 
 @property (nonatomic, strong) NSString *path;//if nil, has default path
 
-@property (nonatomic, weak) id<TableViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<FlieListControllerDelegate> delegate;
 
 @end

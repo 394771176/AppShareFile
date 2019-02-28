@@ -6,14 +6,14 @@
 //  Copyright © 2019年 cheng. All rights reserved.
 //
 
-#import "TableViewController.h"
+#import "FlieListController.h"
 #import "DTFileShareManager.h"
 
-@interface TableViewController ()
+@interface FlieListController ()
 
 @end
 
-@implementation TableViewController
+@implementation FlieListController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,8 +80,8 @@
             path = [_path stringByAppendingPathComponent:fileName];
         }
         
-        if (_delegate && [_delegate respondsToSelector:@selector(TableViewController:path:)]) {
-            [_delegate TableViewController:self path:path];
+        if (_delegate && [_delegate respondsToSelector:@selector(FlieListController:path:)]) {
+            [_delegate FlieListController:self path:path];
         }
     } else {
         if (indexPath.row == 0) {

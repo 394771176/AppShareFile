@@ -9,13 +9,13 @@
 #import "ViewController.h"
 #import <Photos/Photos.h>
 #import "DTFileShareManager.h"
-#import "TableViewController.h"
+#import "FlieListController.h"
 #import "FFJSONHelper.h"
 
 @interface ViewController () <
 UIDocumentPickerDelegate
 ,UIDocumentBrowserViewControllerDelegate
-,TableViewControllerDelegate
+,FlieListControllerDelegate
 >
 
 {
@@ -137,7 +137,7 @@ UIDocumentPickerDelegate
             NSString *path = DOCPATH(@"share_file");
             NSArray<NSString *> *array = [DTFileManager contentsWithPath:path];
             
-            TableViewController *vc = [[TableViewController alloc] init];
+            FlieListController *vc = [[FlieListController alloc] init];
             vc.dataSource = array;
             vc.path = path;
             vc.delegate = self;
@@ -150,7 +150,7 @@ UIDocumentPickerDelegate
             
             NSArray<NSString *> *array = [DTFileManager contentsWithPath:url.path];
             
-            TableViewController *vc = [[TableViewController alloc] init];
+            FlieListController *vc = [[FlieListController alloc] init];
             vc.dataSource = array;
             vc.path = url.path;
             vc.delegate = self;
@@ -238,9 +238,9 @@ UIDocumentPickerDelegate
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - TableViewControllerDelegate
+#pragma mark - FlieListControllerDelegate
 
-- (void)TableViewController:(TableViewController *)vc path:(NSString *)path
+- (void)FlieListController:(FlieListController *)vc path:(NSString *)path
 {
     textView.text = [NSString stringWithFormat:@"%@",path];
     
