@@ -205,6 +205,7 @@ UIDocumentPickerDelegate
 
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls
 {
+    //todo 交互时 尽量使用URL来操作，不要用 obj.absoluteString
     textView.text = [NSString stringWithFormat:@"%@",urls];
     [urls enumerateObjectsUsingBlock:^(NSURL * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (_btnTag == 1) {
@@ -249,6 +250,9 @@ UIDocumentPickerDelegate
     if (_btnTag == 3) {
         [DTFileShareManager shareFileWithPath:path];
     } else if (_btnTag == 4) {
+        if ([path hasSuffix:@"png"]) {
+            imageView.image = [UIImage imageWithContentsOfFile:path];
+        }
         NSString *toPath = [DTFileShareManager pathWithName:path.lastPathComponent];
         [DTFileManager copyItemWithPath:path toPath:toPath];
     }
